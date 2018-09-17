@@ -10,14 +10,11 @@ app.use(bodyParser.json())
 app.post('/users', function(req, res) {
   let body = req.body;
   // console.log(req.body)
-  let rawData = fs.readFileSync('./storage.json', 'utf8');
-  let parsedData = JSON.parse(rawData);
-  // console.log(typeof rawData);
-  // console.log(rawData);
-  // console.log("******")
-  // console.log(parsedData)
+  let rawrawData = fs.readFileSync('./storage.json', 'utf8');
+  let parsedData = JSON.parse(rawrawData);
+
   parsedData.push(body);
-  var putInJsonFile = fs.writeFileSync("./storage.json", JSON.stringify(parsedData));
+  var addJsonFile = fs.writeFileSync("./storage.json", JSON.stringify(parsedData));
   res.json(req.body);
 });
 
@@ -30,10 +27,10 @@ app.get('/users', function(req, res) {
 app.get('/users/:name', function(req, res) {
   fs.readFile('./storage.json', 'utf8', function(err, data) {
     let userData = JSON.parse(data)
-    let foundUser = userData.filter((item) => {
+    let findUser = userData.filter((item) => {
       return item.name == req.params.name
     })
-    res.json(foundUser)
+    res.json(findUser)
   })
 });
 
